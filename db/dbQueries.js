@@ -101,7 +101,6 @@ const getPopularColors = (productsList) => {
             color,
             name: getColorName(color),
         }));
-    console.log(productsColor)
 
     return productsColor;
 };

@@ -16,12 +16,7 @@ export default function NotFound() {
           <li>Adjust the price range</li>
           <li>Select different colors</li>
         </ul>
-        <button
-          className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
-          onClick={() => window.location.reload()} // Optional: Scrolls back to the top of the page
-        >
-          Reset Filters
-        </button>
+        
       </div>
     </div>
   );

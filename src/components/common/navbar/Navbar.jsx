@@ -56,6 +56,7 @@ export default function NavbarPage() {
           />
           <p  onClick={() => {navigate("/shop")}} className="md:font-bold font-semibold text-inherit">E-Shop</p>
         </NavbarBrand>
+        {/* <h4 className=" mx-2 font-bold">Shop</h4> */}
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
