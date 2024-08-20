@@ -57,7 +57,7 @@ function FilterByCategory() {
 
   
   return (
-    <div className="mb-6 border-2 border-lime-400 rounded-md p-2">
+    <div className="mb-6 border-2 border-lime-400 rounded-md p-2 ">
       <h4 className="font-medium mb-2">Filter by Category</h4>
       <div className="flex flex-col gap-2">
         {/* mapping into all categories */}

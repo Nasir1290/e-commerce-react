@@ -41,7 +41,7 @@ function FilterByPriceRange() {
   }, [price]);
 
   return (
-    <div className="mb-6">
+    <div className=" mb-6 border-2 border-indigo-500 rounded-md p-2 ">
       <h4 className="font-medium mb-2">Price Range</h4>
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">

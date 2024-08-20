@@ -150,7 +150,7 @@ function FilterByColor() {
   };
 
   return (
-    <div className="mb-6 border-2 border-purple-500 rounded-md p-2 bg-gray-200">
+    <div className="mb-6 border-2 border-purple-500 rounded-md p-2 bg-gray-100">
       <h4 className="font-medium mb-2">Filter by Color</h4>
       <div className="grid grid-rows-2 grid-flow-col gap-2">
         {allProductColors &&
