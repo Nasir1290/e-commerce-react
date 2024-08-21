@@ -5,6 +5,7 @@ import NavbarPage from "./components/common/navbar/Navbar.jsx";
 import ProductsProvider from "./providers/ProductsProvider.jsx";
 import Shoping from "./components/filters/Shoping.jsx";
 import FooterPage from "./components/common/footer/Footer.jsx";
+import OurMission from "./pages/OurMission.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<Shoping />} />
+          <Route path="/mission" element={<OurMission />} />
           <Route path="*" element={<Shoping />} />
         </Routes>
         <FooterPage/>

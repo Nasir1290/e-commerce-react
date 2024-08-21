@@ -128,6 +128,8 @@ export default function NavbarPage() {
           >
             Home
           </Link>
+
+
           <Link
             color="foreground"
             onClick={(event) => {
@@ -138,6 +140,19 @@ export default function NavbarPage() {
             size="lg"
           >
             Shop
+          </Link>
+
+
+          <Link
+            color="foreground"
+            onClick={(event) => {
+              event.preventDefault();
+              navigate("/mission");
+            }}
+            className="w-full"
+            size="lg"
+          >
+            Our Mission
           </Link>
         </NavbarMenuItem>
 
