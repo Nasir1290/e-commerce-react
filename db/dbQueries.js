@@ -4,9 +4,9 @@ import allData from './data.js';
 
 
 const getAllProducts = () => {
-    return allProducts;
-
-}
+    return allProducts.sort((a, b) => b.price-a.price );
+  };
+  
 
 const getAllCategories = () => {
     const categories = [];
