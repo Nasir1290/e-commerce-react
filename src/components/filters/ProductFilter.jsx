@@ -24,7 +24,7 @@ function ProductFilter() {
       {/* Color Filter */}
       <FilterByColor />
       <button
-        className=" my-4 px-4 py-2 bg-orange-500 text-white font-semibold rounded-md"
+        className=" my-4 px-12 py-2 bg-orange-500 text-white font-semibold rounded-md"
         onClick={(event) => {
           dispatch({
             type: actions.products.LOAD_ALL_PRODUCTS,
