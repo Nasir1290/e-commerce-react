@@ -16,7 +16,8 @@ const ProductsReducer = (state, action) => {
         case actions.products.LOAD_ALL_PRODUCTS: {
             return {
                 ...state,
-                products: action.data
+                products: action.data,
+                filters:{...state.filters}
             }
         }
 

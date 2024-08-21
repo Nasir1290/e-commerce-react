@@ -34,29 +34,6 @@ function FilterByCategory() {
     });
   };
 
-  const handleClearcategoryFilter = (event) => {
-    event.preventDefault();
-    let updatedCategoryList = [];
-    setSelectedCategory(updatedCategoryList);
-    // Use the updated category list in the dispatch action
-    dispatch({
-      type: actions.products.FILTER_BY_CATEGORY,
-      data: getProductsByCategory(updatedCategoryList, state.products),
-      category: updatedCategoryList,
-    });
-  };
-
-  // useEffect(() => {
-  //   let updatedCategoryList = [];
-  //   setSelectedCategory(updatedCategoryList);
-  //   // Use the updated category list in the dispatch action
-  //   dispatch({
-  //     type: actions.products.FILTER_BY_CATEGORY,
-  //     data: getProductsByCategory(updatedCategoryList, state.products),
-  //     category: updatedCategoryList,
-  //   });
-  // }, [selectedCategory]);
-
   return (
     <div className="mb-6 border-2 border-lime-400 rounded-md p-2 ">
       <h4 className="font-medium mb-2">Filter by Category</h4>
@@ -78,12 +55,12 @@ function FilterByCategory() {
           </label>
         ))}
       </div>
-      <button
+      {/* <button
         className=" my-4 px-4 py-2 bg-cyan-500 text-white font-semibold rounded-md"
         onClick={handleClearcategoryFilter}
       >
         Reset
-      </button>
+      </button> */}
     </div>
   );
 }

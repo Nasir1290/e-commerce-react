@@ -217,12 +217,6 @@ function FilterByPriceRange() {
     }));
   };
 
-  const handleResetFilterByPrice = () => {
-    setPrice({
-      minPrice: 0,
-      maxPrice: 0,
-    });
-  };
 
   // Load all products if they aren't already loaded
   useEffect(() => {
@@ -294,12 +288,12 @@ function FilterByPriceRange() {
           />
         </div>
       </div>
-      <button
+      {/* <button
         className="my-4 px-4 py-2 bg-lime-500 text-white font-semibold rounded-md"
         onClick={handleResetFilterByPrice}
       >
         Reset
-      </button>
+      </button> */}
     </div>
   );
 }
