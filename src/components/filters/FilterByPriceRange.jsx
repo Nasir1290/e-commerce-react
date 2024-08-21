@@ -204,20 +204,11 @@ import actions from "../../actions";
 
 function FilterByPriceRange() {
   const { state, dispatch } = useProduct();
+  
   const [price, setPrice] = useState({
     minPrice: 0,
     maxPrice: 0,
   });
-    let allProducts = state?.products;
-
-    if(minPrice ===0 && maxPrice===0) {
-      dispatch({
-        type: actions.products.FILTER_BY_PRICE_RANGE,
-        data: allProducts,
-        minPrice,
-        maxPrice,
-      });
-    }
 
   const handleFilterByPrice = (event) => {
     setPrice((prevPrice) => ({
@@ -244,7 +235,7 @@ function FilterByPriceRange() {
   }, [state.products.length, dispatch]);
 
   useEffect(() => {
-    
+    console.log("renering")
     const minPrice = parseInt(price.minPrice) || 0;
     const maxPrice = parseInt(price.maxPrice) || 0;
 
