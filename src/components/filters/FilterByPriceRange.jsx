@@ -114,7 +114,7 @@ function FilterByPriceRange() {
     const minPrice = parseInt(price.minPrice) || 0;
     const maxPrice = parseInt(price.maxPrice) || 0; // Set a fallback value
 
-    if (maxPrice >= minPrice) {
+    if (maxPrice > minPrice) {
       const filteredProducts = getProductsByPrice(minPrice, maxPrice, state.products);
       dispatch({
         type: actions.products.FILTER_BY_PRICE_RANGE,
@@ -122,7 +122,6 @@ function FilterByPriceRange() {
         minPrice: minPrice,
         maxPrice: maxPrice,
       });
-      console.log(filteredProducts)
     }
   }, [price,price.minPrice]);
 

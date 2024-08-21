@@ -42,14 +42,22 @@ const getTrendingProducts = () => {
 }
 
 
-const getProductsByCategory = (categories = []) => {
+const getProductsByCategory = (categories = [], productList = []) => {
     if (categories.length === 0) {
         return allProducts;
     }
-    const productsBycategory = allProducts.filter((product) => {
-        return categories.includes(product.category);
-    })
-    return productsBycategory;
+    if (categories.length === 1) {
+        const productsBycategory = productList.filter((product) => {
+            return categories.includes(product.category);
+        })
+        return productsBycategory;
+    }
+    if (categories.length >= 2) {
+        const productsBycategory = allProducts.filter((product) => {
+            return categories.includes(product.category);
+        });
+        return productsBycategory
+    }
 }
 
 const getProductsByPrice = (minPrice = 0, maxPrice = 0, productsList = []) => {
@@ -106,6 +114,9 @@ const getPopularColors = (productsList) => {
 };
 
 const getProductsByColor = (color = "", productList = []) => {
+    if (color.length === 0) {
+        return productList;
+    }
     const filteredProducts = productList.filter((product) => {
         return product?.colors.includes(color);
     })

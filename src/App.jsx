@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import NavbarPage from "./components/common/navbar/Navbar.jsx";
 import ProductsProvider from "./providers/ProductsProvider.jsx";
 import Shoping from "./components/filters/Shoping.jsx";
+import FooterPage from "./components/common/footer/Footer.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/shop" element={<Shoping />} />
           <Route path="*" element={<Shoping />} />
         </Routes>
+        <FooterPage/>
       </div>
     </ProductsProvider>
   );

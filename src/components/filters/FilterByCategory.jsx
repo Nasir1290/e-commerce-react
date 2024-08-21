@@ -46,11 +46,12 @@ function FilterByCategory() {
       );
     }
     // Update the selected category state
+
     setSelectedCategory(updatedCategoryList);
     // Use the updated category list in the dispatch action
     dispatch({
       type: actions.products.FILTER_BY_CATEGORY,
-      data: getProductsByCategory(updatedCategoryList),
+      data: getProductsByCategory(updatedCategoryList,state.products),
       category: updatedCategoryList,
     });
   };
