@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllCategories, getProductsByCategory } from "../../../db/dbQueries";
 import useProduct from "../../hooks/useProduct";
 import actions from "../../actions";
@@ -9,28 +9,6 @@ function FilterByCategory() {
   const [selectedCategory, setSelectedCategory] = useState(
     state?.filters?.category ?? []
   );
-
-  //   const handleCategoryChange = (event) => {
-  //     const { name, checked } = event.target;
-
-  //     // added checked category to the category list
-  //     if (checked) {
-  //       // If the checkbox is checked, add the category to the selected list
-  //       setSelectedCategory([...selectedCategory, name]);
-  //     } else {
-  //       // If the checkbox is unchecked, remove the category from the selected list
-  //       setSelectedCategory(
-  //         selectedCategory.filter((category) => category !== name)
-  //       );
-  //     }
-  //     // added checked category to the category list
-
-  //     // add checked category items to the state
-  //     dispatch({
-  //       type: actions.products.FILTER_BY_CATEGORY,
-  //       data: getProductsByCategory(selectedCategory),
-  //     });
-  //   };
 
   const handleCategoryChange = (event) => {
     const { name, checked } = event.target;
@@ -51,12 +29,34 @@ function FilterByCategory() {
     // Use the updated category list in the dispatch action
     dispatch({
       type: actions.products.FILTER_BY_CATEGORY,
-      data: getProductsByCategory(updatedCategoryList,state.products),
+      data: getProductsByCategory(updatedCategoryList, state.products),
       category: updatedCategoryList,
     });
   };
 
-  
+  const handleClearcategoryFilter = (event) => {
+    event.preventDefault();
+    let updatedCategoryList = [];
+    setSelectedCategory(updatedCategoryList);
+    // Use the updated category list in the dispatch action
+    dispatch({
+      type: actions.products.FILTER_BY_CATEGORY,
+      data: getProductsByCategory(updatedCategoryList, state.products),
+      category: updatedCategoryList,
+    });
+  };
+
+  // useEffect(() => {
+  //   let updatedCategoryList = [];
+  //   setSelectedCategory(updatedCategoryList);
+  //   // Use the updated category list in the dispatch action
+  //   dispatch({
+  //     type: actions.products.FILTER_BY_CATEGORY,
+  //     data: getProductsByCategory(updatedCategoryList, state.products),
+  //     category: updatedCategoryList,
+  //   });
+  // }, [selectedCategory]);
+
   return (
     <div className="mb-6 border-2 border-lime-400 rounded-md p-2 ">
       <h4 className="font-medium mb-2">Filter by Category</h4>
@@ -78,6 +78,12 @@ function FilterByCategory() {
           </label>
         ))}
       </div>
+      <button
+        className=" my-4 px-4 py-2 bg-cyan-500 text-white font-semibold rounded-md"
+        onClick={handleClearcategoryFilter}
+      >
+        Reset
+      </button>
     </div>
   );
 }

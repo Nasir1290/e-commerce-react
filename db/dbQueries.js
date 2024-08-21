@@ -4,9 +4,9 @@ import allData from './data.js';
 
 
 const getAllProducts = () => {
-    return allProducts.sort((a, b) => b.price-a.price );
-  };
-  
+    return allProducts.sort((a, b) => b.price - a.price);
+};
+
 
 const getAllCategories = () => {
     const categories = [];
@@ -61,11 +61,19 @@ const getProductsByCategory = (categories = [], productList = []) => {
 }
 
 const getProductsByPrice = (minPrice = 0, maxPrice = 0, productsList = []) => {
-    const filteredProducts = productsList.filter((product) => {
-        const productPrice = parseInt(product.price)
-        return productPrice >= minPrice && productPrice <= maxPrice
-    })
-    return filteredProducts;
+    if (maxPrice > minPrice) {
+        const filteredProducts = productsList.filter((product) => {
+            const productPrice = parseInt(product.price)
+            return productPrice >= minPrice && productPrice <= maxPrice
+        })
+        return filteredProducts;
+    }
+
+    if (minPrice > maxPrice) {
+        const filteredProducts = getAllProducts();
+        return filteredProducts;
+    }
+
 }
 
 
