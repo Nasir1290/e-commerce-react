@@ -14,7 +14,6 @@ function HomePage() {
       <AllCategories />
       <Offer />
       <TrendingProducts />
-      
     </div>
   );
 }

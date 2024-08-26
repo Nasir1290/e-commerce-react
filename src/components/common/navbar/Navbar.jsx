@@ -31,7 +31,7 @@ export default function NavbarPage() {
   const menuItems = [
     "Home",
     "Shop",
-    // "Activity",
+    "Trending",
     // "Analytics",
     // "System",
     // "Deployments",
@@ -48,14 +48,25 @@ export default function NavbarPage() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
+        {/* company logo */}
         <NavbarBrand>
           <Image
-          onClick={() => {navigate("/shop")}}
+            onClick={() => {
+              navigate("/");
+            }}
             className=" w-8 h-8 md:w-16 md:h-16 rounded-full"
             src={LogoImage}
           />
-          <p  onClick={() => {navigate("/shop")}} className="md:font-bold font-semibold text-inherit">E-Shop</p>
+          <p
+            onClick={() => {
+              navigate("/");
+            }}
+            className="md:font-bold font-semibold text-inherit"
+          >
+            E-Shop
+          </p>
         </NavbarBrand>
+
         {/* <h4 className=" mx-2 font-bold">Shop</h4> */}
       </NavbarContent>
 
@@ -81,6 +92,7 @@ export default function NavbarPage() {
           type="search"
         />
 
+        {/* user menus like logout card and many thing to added here */}
         {/* Avatar Dropdown added here */}
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
@@ -100,11 +112,11 @@ export default function NavbarPage() {
               <p className="font-semibold">zoey@example.com</p>
             </DropdownItem>
             {/* <DropdownItem key="settings">My Settings</DropdownItem> */}
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
+            {/* <DropdownItem key="team_settings">Team Settings</DropdownItem>
             <DropdownItem key="analytics">Analytics</DropdownItem>
             <DropdownItem key="system">System</DropdownItem>
             <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
+            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem> */}
             <DropdownItem key="logout" color="danger">
               Log Out
             </DropdownItem>
@@ -112,6 +124,8 @@ export default function NavbarPage() {
         </Dropdown>
       </NavbarContent>
 
+
+      {/* Menu item for mobile user */}
       <NavbarMenu>
         {/* {menuItems.map((item, index) => ( */}
         {/* <NavbarMenuItem key={`${item}-${index}`}> */}
@@ -129,7 +143,6 @@ export default function NavbarPage() {
             Home
           </Link>
 
-
           <Link
             color="foreground"
             onClick={(event) => {
@@ -142,6 +155,17 @@ export default function NavbarPage() {
             Shop
           </Link>
 
+          <Link
+            color="foreground"
+            onClick={(event) => {
+              event.preventDefault();
+              navigate("/trending");
+            }}
+            className="w-full"
+            size="lg"
+          >
+            Trending
+          </Link>
 
           <Link
             color="foreground"

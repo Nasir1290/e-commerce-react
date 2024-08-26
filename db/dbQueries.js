@@ -1,6 +1,5 @@
 import colorName from 'color-name';
 import allProducts from "./data.js";
-import allData from './data.js';
 
 
 const getAllProducts = () => {
@@ -42,17 +41,11 @@ const getTrendingProducts = () => {
 }
 
 
-const getProductsByCategory = (categories = [], productList = []) => {
+const getProductsByCategory = (categories = []) => {
     if (categories.length === 0) {
         return allProducts;
     }
-    if (categories.length === 1) {
-        const productsBycategory = productList.filter((product) => {
-            return categories.includes(product.category);
-        })
-        return productsBycategory;
-    }
-    if (categories.length >= 2) {
+    if (categories.length >= 0) {
         const productsBycategory = allProducts.filter((product) => {
             return categories.includes(product.category);
         });
@@ -60,23 +53,21 @@ const getProductsByCategory = (categories = [], productList = []) => {
     }
 }
 
-const getProductsByPrice = (minPrice = 0, maxPrice = 0, productsList = []) => {
+
+const getProductsByPrice = (minPrice = 0, maxPrice = 0, products = []) => {
+    if (minPrice > maxPrice) {
+        return products
+    };
     if (maxPrice > minPrice) {
-        const filteredProducts = productsList.filter((product) => {
-            const productPrice = parseInt(product.price)
+        const filteredProducts = products.filter((product) => {
+            const productPrice = parseInt(product.discount_price)
             return productPrice >= minPrice && productPrice <= maxPrice
         })
         return filteredProducts;
     }
 
-    if (minPrice > maxPrice) {
-        const filteredProducts = getAllProducts();
-        return filteredProducts;
-    }
 
 }
-
-
 
 const getColorName = (hex) => {
 
@@ -103,7 +94,6 @@ const getColorName = (hex) => {
 
 const getPopularColors = (productsList) => {
     const colorCount = {};
-
     productsList.forEach((product) => {
         product.colors.forEach((color) => {
             colorCount[color] = (colorCount[color] || 0) + 1;
@@ -121,6 +111,8 @@ const getPopularColors = (productsList) => {
     return productsColor;
 };
 
+
+
 const getProductsByColor = (color = "", productList = []) => {
     if (color.length === 0) {
         return productList;
@@ -133,10 +125,98 @@ const getProductsByColor = (color = "", productList = []) => {
 }
 
 
+const getProductsByFilters = (filters) => {
+    const { categories, colors, maxPrice, minPrice } = filters;
+
+    // If no filters is selected
+    if (categories?.length === 0 && colors?.length === 0 && maxPrice === 0 && minPrice === 0) {
+        return allProducts;
+    }
+    // if only category selected
+    else if (categories?.length > 0 && colors?.length === 0 && maxPrice === 0 && minPrice === 0) {
+        return getProductsByCategory(categories);
+    }
+    // if only price is selected
+    else if (categories?.length === 0 && colors?.length === 0 && maxPrice >= 0 && minPrice >= 0) {
+        return getProductsByPrice(minPrice, maxPrice, allProducts)
+    }
+
+    // if only color are selected
+    if (categories?.length === 0 && colors?.length >= 1 && maxPrice === 0 && minPrice === 0) {
+        return getProductsByColor(colors[0], allProducts)
+    }
+
+    // if category and price are selected
+    if (categories?.length >= 1 && colors?.length === 0 && maxPrice >= 0 && minPrice >= 0) {
+        const filteredByCategory = getProductsByCategory(categories);
+        const filteredByPrice = getProductsByPrice(minPrice, maxPrice, filteredByCategory);
+        return filteredByPrice;
+    }
+
+    // if category and color are selected
+    if (categories?.length >= 1 && colors?.length >= 1 && maxPrice === 0 && minPrice === 0) {
+        const filteredByCategory = getProductsByCategory(categories);
+        const filteredByColor = getProductsByColor(colors[0], filteredByCategory);
+
+        return filteredByColor;
+    }
+
+    // if price and color are selected
+    if (categories?.length === 0 && colors?.length >= 1 && maxPrice >= 0 && minPrice >= 0) {
+        const filteredByPrice = getProductsByPrice(minPrice, maxPrice, allProducts);
+        const filteredByColor = getProductsByColor(colors[0], filteredByPrice);
+
+        return filteredByColor;
+    }
+
+    if (categories?.length >= 1 && colors?.length >= 1 && maxPrice >= 0 && minPrice >= 0) {
+        const filteredByCategory = getProductsByCategory(categories);
+        const filteredByPrice = getProductsByPrice(minPrice, maxPrice, filteredByCategory);
+        const filteredByColor = getProductsByColor(colors[0], filteredByPrice);
+
+        return filteredByColor;
+    }
+
+
+}
+
+
+// const getProductsByFilters = (filters) => {
+//     const { categories = [], colors = [], maxPrice = 0, minPrice = 0 } = filters;
+
+//     let filteredProducts = allProducts;
+
+//     // Apply category filter if any are selected
+//     if (categories.length > 0) {
+//         filteredProducts = getProductsByCategory(categories);
+//     }
+
+//     // Apply price filter if both minPrice and maxPrice are valid
+//     if (minPrice > 0 || maxPrice > 0) {
+//         filteredProducts = getProductsByPrice(minPrice, maxPrice, filteredProducts);
+//     }
+
+//     // Apply color filter if any colors are selected
+//     if (colors.length > 0) {
+//         filteredProducts = getProductsByColor(colors[0], filteredProducts);
+//     }
+
+//     return filteredProducts;
+// };
+
+
+
+
+
+
+
+
+
 
 
 export {
     getAllProducts,
+    getProductsByFilters,
     getAllCategories,
     productByCategory,
     getTrendingProducts,

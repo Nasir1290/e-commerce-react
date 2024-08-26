@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import ProductCard from "../../pages/products/ProductCard";
 import Paginate from "../pagination/Paginate";
 import NotFound from "./NotFound";
+import useProduct from "../../hooks/useProduct";
 
-function FilteredProducts({ products }) {
+function FilteredProducts() {
+  const { state, dispatch } = useProduct();
   // pagination logic
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const paginatedProducts = products.slice(
+  const totalPages = Math.ceil(state.products?.length / itemsPerPage);
+  const paginatedProducts = state.products?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -32,7 +34,7 @@ function FilteredProducts({ products }) {
       {/* Repeat for more products */}
 
       {/* pagination */}
-      {products.length > 12 && (
+      {state.products?.length > 12 && (
         <Paginate
           total={totalPages}
           currentPage={currentPage}

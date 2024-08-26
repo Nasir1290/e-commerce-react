@@ -6,6 +6,7 @@ import ProductsProvider from "./providers/ProductsProvider.jsx";
 import Shoping from "./components/filters/Shoping.jsx";
 import FooterPage from "./components/common/footer/Footer.jsx";
 import OurMission from "./pages/OurMission.jsx";
+import TrendingProducts from "./components/categories/TrendingProducts.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<Shoping />} />
           <Route path="/mission" element={<OurMission />} />
+          <Route path="/trending" element={<TrendingProducts />} />
           <Route path="*" element={<Shoping />} />
         </Routes>
         <FooterPage/>

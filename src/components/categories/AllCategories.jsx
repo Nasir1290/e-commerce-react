@@ -1,80 +1,3 @@
-// import { Image } from "@nextui-org/react";
-// import { Link } from "react-router-dom";
-// import CategoryImage from "../../assets/images/category.png";
-
-// function AllCategories() {
-//   return (
-//     <div className="container py-16">
-//       <h2 className="text-2xl font-medium text-gray-800 uppercase mb-6">
-//         Shop by Category
-//       </h2>
-//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-//         <div className="relative rounded-sm overflow-hidden ">
-//           <Image src={CategoryImage} alt="category 1" className="w-full" />
-//           <Link
-//             to={""}
-//             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium -hover:bg-opacity-60 transition"
-//           >
-//             Bedroom
-//           </Link>
-//         </div>
-
-//         <div className="relative rounded-sm overflow-hidden ">
-//           <Image src={CategoryImage} alt="category 1" className="w-full" />
-//           <Link
-//             to={""}
-//             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium -hover:bg-opacity-60 transition"
-//           >
-//             Mattress
-//           </Link>
-//         </div>
-
-//         <div className="relative rounded-sm overflow-hidden ">
-//           <Image src={CategoryImage} alt="category 1" className="w-full" />
-//           <Link
-//             to={""}
-//             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium -hover:bg-opacity-60 transition"
-//           >
-//             Outdoor
-//           </Link>
-//         </div>
-
-//         <div className="relative rounded-sm overflow-hidden ">
-//           <Image src={CategoryImage} alt="category 1" className="w-full" />
-//           <Link
-//             to={""}
-//             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium -hover:bg-opacity-60 transition"
-//           >
-//             Sofa
-//           </Link>
-//         </div>
-
-//         <div className="relative rounded-sm overflow-hidden ">
-//           <Image src={CategoryImage} alt="category 1" className="w-full" />
-//           <Link
-//             to={""}
-//             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium -hover:bg-opacity-60 transition"
-//           >
-//             Living Room
-//           </Link>
-//         </div>
-
-//         <div className="relative rounded-sm overflow-hidden ">
-//           <Image src={CategoryImage} alt="category 1" className="w-full" />
-//           <Link
-//             to={""}
-//             className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium -hover:bg-opacity-60 transition"
-//           >
-//             Kitchen
-//           </Link>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default AllCategories;
-
 import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { getAllCategories, getProductsByCategory } from "../../../db/dbQueries";
@@ -90,14 +13,13 @@ export default function AllCategories() {
 
   const handleNavigatePage = (event, category) => {
     event.preventDefault();
+    // dispatch action
+    dispatch({
+      type: actions.products.FILTER_PRODUCTS,
+      categories: [category],
+    });
 
     navigate("/shop");
-
-    dispatch({
-      type: actions.products.FILTER_BY_CATEGORY,
-      data: getProductsByCategory([category]),
-      category: [category],
-    });
   };
 
   return (

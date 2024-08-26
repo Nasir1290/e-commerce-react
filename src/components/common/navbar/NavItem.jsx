@@ -14,7 +14,7 @@ export default function NavItem() {
         onSelectionChange={(key) => {
           if (key === "home") navigate("/");
           if (key === "shop") navigate("/shop");
-          if (key === "trending") navigate("/shop");
+          if (key === "trending") navigate("/trending");
           if (key === "our mission") navigate("/mission");
         }}
       >

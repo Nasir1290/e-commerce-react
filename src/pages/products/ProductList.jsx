@@ -4,6 +4,8 @@ import ProductCard from "./ProductCard";
 import Paginate from "../../components/pagination/Paginate";
 
 function ProductList({ products }) {
+
+  // paginate logic
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
   const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -15,6 +17,8 @@ function ProductList({ products }) {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  // paginate logic
 
   return (
     <>
