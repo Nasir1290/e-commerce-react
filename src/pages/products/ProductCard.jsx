@@ -103,6 +103,12 @@ function ProductCard({ product }) {
             quality={100}
             alt="product 1"
             className="w-[500px] h-[300px] group-hover:opacity-40 transition-opacity duration-300 hover:scale-[1.08]"
+            style={{
+              borderBottomLeftRadius: "0.5rem", // Round only the bottom-left corner
+              borderBottomRightRadius: "0.5rem", // Round only the bottom-right corner
+              borderTopLeftRadius: "0", // Keep the top-left corner square
+              borderTopRightRadius: "0", // Keep the top-right corner square
+            }}
           />
         </button>
 
@@ -112,7 +118,7 @@ function ProductCard({ product }) {
         >
           <Link
             to=""
-            className="text-white text-lg w-12 h-12 font-bolder rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
+            className="text-white text-lg w-12 h-12 font-bolder rounded-b-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
             title="view product"
           >
             {/* <i className="fa-solid fa-magnifying-glass" /> */}
