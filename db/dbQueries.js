@@ -181,36 +181,6 @@ const getProductsByFilters = (filters) => {
 }
 
 
-// const getProductsByFilters = (filters) => {
-//     const { categories = [], colors = [], maxPrice = 0, minPrice = 0 } = filters;
-
-//     let filteredProducts = allProducts;
-
-//     // Apply category filter if any are selected
-//     if (categories.length > 0) {
-//         filteredProducts = getProductsByCategory(categories);
-//     }
-
-//     // Apply price filter if both minPrice and maxPrice are valid
-//     if (minPrice > 0 || maxPrice > 0) {
-//         filteredProducts = getProductsByPrice(minPrice, maxPrice, filteredProducts);
-//     }
-
-//     // Apply color filter if any colors are selected
-//     if (colors.length > 0) {
-//         filteredProducts = getProductsByColor(colors[0], filteredProducts);
-//     }
-
-//     return filteredProducts;
-// };
-
-
-
-
-
-
-
-
 
 
 

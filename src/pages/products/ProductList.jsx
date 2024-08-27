@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import Paginate from "../../components/pagination/Paginate";
+import { NavbarContent } from "@nextui-org/navbar";
+import { Input } from "postcss";
+import { SearchIcon } from "../../components/common/navbar/SearchIcons";
 
 function ProductList({ products }) {
-
   // paginate logic
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;

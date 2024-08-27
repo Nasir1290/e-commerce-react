@@ -1,4 +1,5 @@
 import React from "react";
+import shoppingCartIcon from "/src/assets/icons/shopping-cart.png";
 // import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -54,14 +55,14 @@ export default function NavbarPage() {
             onClick={() => {
               navigate("/");
             }}
-            className=" w-8 h-8 md:w-16 md:h-16 rounded-full"
+            className=" w-8 h-8 md:w-16 md:h-16 rounded-full cursor-pointer"
             src={LogoImage}
           />
           <p
             onClick={() => {
               navigate("/");
             }}
-            className="md:font-bold font-semibold text-inherit"
+            className="md:font-bold font-semibold text-inherit cursor-pointer"
           >
             E-Shop
           </p>
@@ -78,19 +79,11 @@ export default function NavbarPage() {
 
       <NavbarContent justify="end" className="items-center">
         {/* Search Input added here */}
-        <Input
-          classNames={{
-            base: "max-w-full sm:max-w-[10rem] h-10",
-            mainWrapper: "h-full",
-            input: "text-small",
-            inputWrapper:
-              "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-          }}
-          placeholder="Type to search..."
-          size="sm"
-          startContent={<SearchIcon size={18} />}
-          type="search"
-        />
+
+        {/* add a cart icon for add to cart */}
+        <div className=" border-2 border-blue-500 h-10 w-10 rounded-full bg-gray-200 text-green-500 font-bold flex items-center justify-center">
+          <Image src={shoppingCartIcon} className="h-8 w-8"></Image>
+        </div>
 
         {/* user menus like logout card and many thing to added here */}
         {/* Avatar Dropdown added here */}
@@ -123,7 +116,6 @@ export default function NavbarPage() {
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
-
 
       {/* Menu item for mobile user */}
       <NavbarMenu>

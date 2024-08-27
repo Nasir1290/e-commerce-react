@@ -76,10 +76,20 @@
 
 import { Image } from "@nextui-org/react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelectedProduct } from "../../hooks/useSelectedProduct";
 
 function ProductCard({ product }) {
+  const { selectedProduct, setSelectedProduct } = useSelectedProduct();
+  const navigate = useNavigate()
   const stars = Array(Math.round(product?.ratings)).fill("");
+
+  const handleShowProductDetails = (event, product) => {
+    event.preventDefault();
+    // set selected product into the context
+    setSelectedProduct(product)
+    navigate("/product-details");
+  };
 
   return (
     <div className="bg-white shadow rounded overflow-hidden group flex flex-col h-full">
@@ -95,7 +105,7 @@ function ProductCard({ product }) {
           />
         </button> */}
 
-        <button className="relative group">
+        <button className="relative group" onClick={(event) =>handleShowProductDetails(event,product)}>
           <Image
             src={product.image[0]}
             width={500}
