@@ -213,4 +213,3 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
-1
