@@ -213,4 +213,4 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
-123
+12
