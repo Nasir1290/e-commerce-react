@@ -78,16 +78,18 @@ import { Image } from "@nextui-org/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelectedProduct } from "../../hooks/useSelectedProduct";
+import { BiSearch } from "react-icons/bi";
+import { CiSearch } from "react-icons/ci";
 
 function ProductCard({ product }) {
   const { selectedProduct, setSelectedProduct } = useSelectedProduct();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const stars = Array(Math.round(product?.ratings)).fill("");
 
   const handleShowProductDetails = (event, product) => {
     event.preventDefault();
     // set selected product into the context
-    setSelectedProduct(product)
+    setSelectedProduct(product);
     navigate("/product-details");
   };
 
@@ -105,14 +107,17 @@ function ProductCard({ product }) {
           />
         </button> */}
 
-        <button className="relative group" onClick={(event) =>handleShowProductDetails(event,product)}>
+        <button
+          className="relative group"
+          onClick={(event) => handleShowProductDetails(event, product)}
+        >
           <Image
             src={product.image[0]}
             width={500}
             height={300}
             quality={100}
             alt="product 1"
-            className="w-[500px] h-[300px] group-hover:opacity-40 transition-opacity duration-300 hover:scale-[1.08]"
+            className="w-[500px] h-[300px] object-cover group-hover:opacity-40 transition-opacity duration-300 hover:scale-[1.04]"
             style={{
               borderBottomLeftRadius: "0.5rem", // Round only the bottom-left corner
               borderBottomRightRadius: "0.5rem", // Round only the bottom-right corner
@@ -128,25 +133,24 @@ function ProductCard({ product }) {
         >
           <Link
             to=""
-            className="text-white text-lg w-12 h-12 font-bolder rounded-b-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-            title="view product"
+            onClick={(event) => handleShowProductDetails(event, product)}
+            className="text-white text-lg w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center hover:bg-gray-800 transition-all"
+            title="add to wishlist"
           >
-            {/* <i className="fa-solid fa-magnifying-glass" /> */}
-            <svg
-              stroke="white"
-              fill="white"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+            <CiSearch className=" h-7 w-7 text-white font-bold" />
+            {/* <svg
+              stroke="red"
+              fill="red"
+              strokeWidth="4"
+              viewBox="0 0 512 512"
               height="1.3em"
               width="1.3em"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+              <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+            </svg> */}
           </Link>
+
           <Link
             to=""
             className="text-white text-lg w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center hover:bg-gray-800 transition"
@@ -169,7 +173,10 @@ function ProductCard({ product }) {
 
       <div className="pt-4 pb-3 px-4 flex-grow">
         <Link to="">
-          <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
+          <h4
+            onClick={(event) => handleShowProductDetails(event, product)}
+            className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition"
+          >
             {product?.name}
           </h4>
         </Link>

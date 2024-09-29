@@ -15,7 +15,7 @@
     "color-name": "^2.0.0",
     "flowbite-react": "^0.10.1",
     "fontawesome-free": "^1.0.4",
-    "framer-motion": "^11.3.28",
+    "framer-motion": "^11.9.0",
     "mongoose": "^8.5.3",
     "react": "^18.3.1",
     "react-awesome-slider": "^4.1.0",
