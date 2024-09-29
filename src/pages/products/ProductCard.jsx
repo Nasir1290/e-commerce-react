@@ -91,6 +91,13 @@ function ProductCard({ product }) {
     // set selected product into the context
     setSelectedProduct(product);
     navigate("/product-details");
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // This makes the scroll smooth
+      });
+    };
+    scrollToTop();
   };
 
   return (

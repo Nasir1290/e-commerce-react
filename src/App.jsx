@@ -18,6 +18,7 @@ function App() {
           <NavbarPage />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/shop" element={<Shoping />} />
             <Route path="/mission" element={<OurMission />} />
             <Route path="/trending" element={<TrendingProducts />} />
