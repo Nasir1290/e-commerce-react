@@ -3,17 +3,31 @@ import "./product.style.css";
 import { useSelectedProduct } from "../../hooks/useSelectedProduct";
 import ProductList from "./ProductList";
 import { getProductsByCategory } from "../../../db/dbQueries";
+import useCart from "../../hooks/useCart";
+import { toast } from "react-toastify";
+import toastValue from "../../components/shared/toastValue";
 
 function ProductDetails() {
   const { selectedProduct, setSelectedProduct } = useSelectedProduct();
   const relatedProducts = getProductsByCategory(selectedProduct?.category);
+  const {state,dispatch} = useCart();
   // const [allImages, setAllImages] = useState(selectedProduct.image);
   const [selectedImage, setSelectedImage] = useState(selectedProduct?.image[0]);
-  // console.log(selectedProduct);
-
+    const alreadyAdded = state.find((p) => p.id === selectedProduct.id);
   const handleDisplayImage = (image) => {
     setSelectedImage(image);
   };
+
+   const handleAddToCart = (productToAdd) => {
+     const find = state.find((p) => p.id === productToAdd.id);
+     if (!find) {
+       dispatch({
+         type: "addToCart",
+         product: productToAdd,
+       });
+       toast.success("Add to cart successfully.", toastValue);
+     }
+   };
 
   useEffect(() => {
     setSelectedImage(selectedProduct.image[0]);
@@ -234,7 +248,11 @@ function ProductDetails() {
                 src={img}
                 alt={`Thumbnail ${index}`}
                 onClick={() => handleDisplayImage(img)}
-                className="w-16 h-16 sm:w-20 sm:h-20 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-300 hover:border-indigo-600 hover:scale-110"
+                className={`w-16 h-16 sm:w-20 sm:h-20 border-2 rounded-lg cursor-pointer transition-all duration-300 ${
+                  img == selectedImage
+                    ? " border-5 border-purple-600 shadow-md scale-125"
+                    : "border-gray-300"
+                }`}
               />
             ))}
           </div>
@@ -248,12 +266,13 @@ function ProductDetails() {
               {selectedProduct?.name}
             </h2>
             {/* Product Description */}
-            <p className="text-base text-gray-700 mb-4">
+            <p className="text-base text-gray-700 my-4">
+              <span className=" font-bold">description:&nbsp;</span>
               {selectedProduct?.description}
             </p>
             {/* Product Category */}
-            <p className="text-base text-gray-500 mb-4">
-              {selectedProduct?.category}
+            <p className=" text-md font-bold text-gray-700 mb-4">
+              Category:&nbsp;{selectedProduct?.category}
             </p>
 
             {/* Pricing and Discount */}
@@ -295,13 +314,13 @@ function ProductDetails() {
               </span>
             </div>
             <div className="mt-2 font-bold text-lg">
-             Brand: {selectedProduct?.brand}
+              Brand: {selectedProduct?.brand}
             </div>
           </div>
 
           {/* Color Options */}
           <div className="mb-6">
-            <p className="font-medium text-lg text-gray-900 mb-2">Colors</p>
+            <p className="font-bold text-lg text-gray-900 mb-2">Colors:</p>
             <div className="flex gap-3">
               {selectedProduct?.colors.map((color, index) => (
                 <div
@@ -314,8 +333,13 @@ function ProductDetails() {
           </div>
 
           {/* Buy Now Button */}
-          <button className="w-full py-3 text-lg font-semibold text-white bg-indigo-600 rounded-full transition duration-300 hover:bg-indigo-700">
-            Buy Now
+          <button
+            onClick={() => handleAddToCart(selectedProduct)}
+            className={`w-full py-2 text-lg font-semibold text-white bg-indigo-600 rounded-lg transition duration-300 ${
+              alreadyAdded ? "bg-slate-500 cursor-not-allowed" : ""
+            }`}
+          >
+            {alreadyAdded ? "Already Added" : "Add to cart"}
           </button>
         </div>
       </section>

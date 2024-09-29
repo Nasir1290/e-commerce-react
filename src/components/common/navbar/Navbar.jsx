@@ -184,8 +184,18 @@ import { useState, useEffect } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import shoppingCartIcon from "/src/assets/icons/shopping-cart.png";
+import useAuth from "../../../hooks/useAuth";
+import { IoIosLogOut } from "react-icons/io";
+import Loading from "../../shared/Loading";
+import { getAuth, signOut } from "firebase/auth";
+import app from "../../../firebase/firebaseConfig";
+import { CiShoppingCart } from "react-icons/ci";
+import { CgShoppingCart } from "react-icons/cg";
+import { toast } from "react-toastify";
+import toastValue from "../../shared/toastValue";
+import useCart from "../../../hooks/useCart";
+import { TiShoppingCart } from "react-icons/ti";
 
-// import useAuth from "../../hooks/useAuth";
 // import useOpenProfile from "../../hooks/useOpenProfile";
 
 export default function Navbar() {
@@ -195,8 +205,11 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const navigage = useNavigate();
-  // const { loading, user } = useAuth();
-  // const { isOpenProfile, setIsOpenProfile } = useOpenProfile();
+  const { loading, user } = useAuth();
+  const auth = getAuth(app);
+  const firstLetter = user?.displayName?.charAt(0);
+  const {state:cartData,dispatch} = useCart();
+  console.log(cartData)
 
   useEffect(() => {
     const handleResize = () => {
@@ -225,6 +238,21 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [lastScrollY]);
+
+  const handleLogoutClick = async (event) => {
+    event.preventDefault();
+
+    try {
+      await signOut(auth);
+      toast.warn("Logged out successfully", toastValue);
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -265,36 +293,60 @@ export default function Navbar() {
         </Drawer>
 
         <div className="flex mr-2 md:mr-12">
-          <div className=" border-2 border-purple-400 h-9 w-9 p-1 mx-2 rounded-full bg-gray-100 text-green-500 font-bold flex items-center justify-center">
-            <Image src={shoppingCartIcon} className="h-8 w-8"></Image>{" "}
+          {user?.email && (
+            // <div className=" border-2 border-purple-400 h-9 w-9 p-1 mx-2 rounded-full bg-gray-100 text-green-500 font-bold flex items-center justify-center">
+            //   {/* <Image src={shoppingCartIcon} className="h-8 w-8"></Image>{" "} */}
+            //   <CgShoppingCart className="h-7 w-7 font-bold cursor-pointer"/>
+            // </div>
+
+            <Link
+              to="/cart-details"
+              className="relative flex items-center border-2 border-purple-400 h-9 w-9 p-1 mx-4 rounded-full bg-gray-100 text-green-500 font-bold"
+            >
+              <TiShoppingCart className="h-6 w-6 text-indigo-400" />
+              {cartData.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartData.length}
+                </span>
+              )}
+            </Link>
+          )}
+
+          {/* Profile Logic */}
+          <div>
+            {user?.email ? (
+              <div className=" flex">
+                <button
+                  className="text-2xl bg-red-500 text-white px-2 py-1 mr-3 rounded-md"
+                  onClick={handleLogoutClick}
+                >
+                  <IoIosLogOut />
+                </button>
+                <Link
+                  to="/user-profile"
+                  className="border-2 border-blue-600 rounded-full"
+                >
+                  {user?.photoURL ? (
+                    <img
+                      className="h-8 w-8 rounded-full object-cover"
+                      src={user.photoURL}
+                      alt={user.displayName}
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center bg-gray-400 h-8 w-8 rounded-full text-white text-xl uppercase">
+                      {firstLetter}
+                    </div>
+                  )}
+                </Link>
+              </div>
+            ) : (
+              <Link to="/auth/login">
+                <button className="px-2 py-2 bg-green-600 text-white text-small font-bold rounded-md">
+                  Login
+                </button>
+              </Link>
+            )}
           </div>
-
-          {/* {user?.email ? (
-            <Button
-              onClick={() => {
-                setIsOpenProfile(true);
-              }}
-              className="px-3 py-2 border-1 border-b-2 border-black text-black text-xs font-bold rounded-lg"
-            >
-              My Profile
-            </Button>
-          ) : (
-            <Button
-              role="link"
-              onClick={() => navigage("/auth/login")}
-              className="px-3 py-2 border-1 mr-4 border-b-2 border-black text-black text-xs font-bold rounded-lg"
-            >
-              Login
-            </Button>
-          )} */}
-
-          <Button
-            role="link"
-            onClick={() => navigage("/auth/login")}
-            className="px-3 py-2 border-1 mr-4 border-b-2 border-black text-black text-xs font-bold rounded-lg"
-          >
-            Login
-          </Button>
         </div>
       </div>
 
@@ -317,7 +369,7 @@ const MenuBar = ({ isInline, setIsShowMenu }) => {
         behavior: "smooth", // This makes the scroll smooth
       });
     };
-    scrollToTop()
+    scrollToTop();
   }, [location.pathname]);
 
   return (

@@ -78,13 +78,17 @@ import { Image } from "@nextui-org/react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelectedProduct } from "../../hooks/useSelectedProduct";
-import { BiSearch } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
+import useCart from "../../hooks/useCart";
+import { toast } from "react-toastify";
+import toastValue from "../../components/shared/toastValue";
 
 function ProductCard({ product }) {
-  const { selectedProduct, setSelectedProduct } = useSelectedProduct();
+  const { setSelectedProduct } = useSelectedProduct();
+  const { state, dispatch } = useCart();
   const navigate = useNavigate();
   const stars = Array(Math.round(product?.ratings)).fill("");
+  const alreadyAdded = state.find((p) => p.id === product.id);
 
   const handleShowProductDetails = (event, product) => {
     event.preventDefault();
@@ -100,6 +104,16 @@ function ProductCard({ product }) {
     scrollToTop();
   };
 
+  const handleAddToCart = (productToAdd) => {
+    const find = state.find((p) => p.id === productToAdd.id);
+    if (!find) {
+      dispatch({
+        type: "addToCart",
+        product: productToAdd,
+      });
+      toast.success("Add to cart successfully.", toastValue);
+    }
+  };
   return (
     <div className="bg-white shadow rounded overflow-hidden group flex flex-col h-full">
       <div className="relative overflow-hidden">
@@ -206,12 +220,14 @@ function ProductCard({ product }) {
           <div className="text-xs text-gray-500 ml-3">Sku:{product?.sku}</div>
         </div>
       </div>
-      <Link
+      <button
+        onClick={() => handleAddToCart(product)}
+        disabled={alreadyAdded}
         to=""
-        className="mt-auto block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition"
+        className={`mt-auto block w-full py-1 text-center text-white ${alreadyAdded?"bg-slate-500 cursor-not-allowed":""} bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition`}
       >
-        Add to cart
-      </Link>
+        {alreadyAdded ? "Already Added" : "Add to cart"}
+      </button>
     </div>
   );
 }
