@@ -82,6 +82,7 @@ import { CiSearch } from "react-icons/ci";
 import useCart from "../../hooks/useCart";
 import { toast } from "react-toastify";
 import toastValue from "../../components/shared/toastValue";
+import useAuth from "../../hooks/useAuth";
 
 function ProductCard({ product }) {
   const { setSelectedProduct } = useSelectedProduct();
@@ -89,6 +90,7 @@ function ProductCard({ product }) {
   const navigate = useNavigate();
   const stars = Array(Math.round(product?.ratings)).fill("");
   const alreadyAdded = state.find((p) => p.id === product.id);
+  const {loading,user} = useAuth();
 
   const handleShowProductDetails = (event, product) => {
     event.preventDefault();
@@ -105,6 +107,10 @@ function ProductCard({ product }) {
   };
 
   const handleAddToCart = (productToAdd) => {
+    if(!user){
+      toast.error("Login First!", toastValue);
+      return;
+    }
     const find = state.find((p) => p.id === productToAdd.id);
     if (!find) {
       dispatch({

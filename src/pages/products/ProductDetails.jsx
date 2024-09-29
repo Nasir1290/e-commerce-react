@@ -6,28 +6,34 @@ import { getProductsByCategory } from "../../../db/dbQueries";
 import useCart from "../../hooks/useCart";
 import { toast } from "react-toastify";
 import toastValue from "../../components/shared/toastValue";
+import useAuth from "../../hooks/useAuth";
 
 function ProductDetails() {
   const { selectedProduct, setSelectedProduct } = useSelectedProduct();
   const relatedProducts = getProductsByCategory(selectedProduct?.category);
-  const {state,dispatch} = useCart();
+  const { state, dispatch } = useCart();
+  const { loading, user } = useAuth();
   // const [allImages, setAllImages] = useState(selectedProduct.image);
   const [selectedImage, setSelectedImage] = useState(selectedProduct?.image[0]);
-    const alreadyAdded = state.find((p) => p.id === selectedProduct.id);
+  const alreadyAdded = state.find((p) => p.id === selectedProduct.id);
   const handleDisplayImage = (image) => {
     setSelectedImage(image);
   };
 
-   const handleAddToCart = (productToAdd) => {
-     const find = state.find((p) => p.id === productToAdd.id);
-     if (!find) {
-       dispatch({
-         type: "addToCart",
-         product: productToAdd,
-       });
-       toast.success("Add to cart successfully.", toastValue);
-     }
-   };
+  const handleAddToCart = (productToAdd) => {
+    if (!user) {
+      toast.error("Login First!", toastValue);
+      return;
+    }
+    const find = state.find((p) => p.id === productToAdd.id);
+    if (!find) {
+      dispatch({
+        type: "addToCart",
+        product: productToAdd,
+      });
+      toast.success("Add to cart successfully.", toastValue);
+    }
+  };
 
   useEffect(() => {
     setSelectedImage(selectedProduct.image[0]);
