@@ -230,7 +230,8 @@ function ProductCard({ product }) {
         onClick={() => handleAddToCart(product)}
         disabled={alreadyAdded}
         to=""
-        className={`mt-auto block w-full py-1 text-center text-white ${alreadyAdded?"bg-slate-500 cursor-not-allowed":""} bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition`}
+        className={`mt-auto block w-full py-1 text-center text-white ${alreadyAdded?"bg-slate-500 cursor-not-allowed":""} bg-primary border border-primary rounded-b hover:scale-110 transition`}
+        
       >
         {alreadyAdded ? "Already Added" : "Add to cart"}
       </button>
