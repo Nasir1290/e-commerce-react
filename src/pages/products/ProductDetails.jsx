@@ -7,6 +7,7 @@ import useCart from "../../hooks/useCart";
 import { toast } from "react-toastify";
 import toastValue from "../../components/shared/toastValue";
 import useAuth from "../../hooks/useAuth";
+import {motion} from "framer-motion"
 
 function ProductDetails() {
   const { selectedProduct, setSelectedProduct } = useSelectedProduct();
@@ -238,16 +239,28 @@ function ProductDetails() {
         {/* Image section */}
         <div className="slider-box flex flex-col items-center">
           {/* Main image */}
-          <div className="w-full max-w-md lg:max-w-lg mb-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="w-full max-w-md lg:max-w-lg mb-4"
+          >
             <img
               src={selectedImage}
               alt={selectedProduct.name}
               className="max-lg:mx-auto rounded-2xl w-[25rem] h-[16rem] sm:w-[38rem] sm:h-[25rem] object-cover"
             />
-          </div>
+          </motion.div>
 
           {/* Thumbnail images */}
-          <div className="nav-for-slider flex gap-4 justify-center mt-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.4 }}
+            className="nav-for-slider flex gap-4 justify-center mt-4"
+          >
             {selectedProduct?.image.map((img, index) => (
               <img
                 key={index}
@@ -261,11 +274,17 @@ function ProductDetails() {
                 }`}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Product Details section */}
-        <div className="pro-detail flex flex-col gap-y-4">
+        <motion.div
+          initial={{ opacity: 0, x:40 }}
+          animate={{ opacity: 1, x:0 }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="pro-detail flex flex-col gap-y-4"
+        >
           <div className="">
             {/* Product Name */}
             <h2 className="text-3xl font-bold text-gray-900 mb-2">
@@ -347,7 +366,7 @@ function ProductDetails() {
           >
             {alreadyAdded ? "Already Added" : "Add to cart"}
           </button>
-        </div>
+        </motion.div>
       </section>
 
       {/* Related Products */}

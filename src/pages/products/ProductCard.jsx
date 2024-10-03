@@ -75,6 +75,7 @@
 // export default ProductCard;
 
 import { Image } from "@nextui-org/react";
+import { motion } from "framer-motion";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelectedProduct } from "../../hooks/useSelectedProduct";
@@ -90,7 +91,7 @@ function ProductCard({ product }) {
   const navigate = useNavigate();
   const stars = Array(Math.round(product?.ratings)).fill("");
   const alreadyAdded = state.find((p) => p.id === product.id);
-  const {loading,user} = useAuth();
+  const { loading, user } = useAuth();
 
   const handleShowProductDetails = (event, product) => {
     event.preventDefault();
@@ -107,7 +108,7 @@ function ProductCard({ product }) {
   };
 
   const handleAddToCart = (productToAdd) => {
-    if(!user){
+    if (!user) {
       toast.error("Login First!", toastValue);
       return;
     }
@@ -121,7 +122,13 @@ function ProductCard({ product }) {
     }
   };
   return (
-    <div className="bg-white shadow rounded overflow-hidden group flex flex-col h-full">
+    <motion.div
+      initial={{ opacity: 0, scale:.9 }}
+      animate={{ opacity: 1, scale:1 }}
+      exit={{ opacity: 0, scale:1 }}
+      transition={{ duration: 0.4 }}
+      className="bg-white shadow rounded overflow-hidden group flex flex-col h-full"
+    >
       <div className="relative overflow-hidden">
         {/* <button>
           <Image
@@ -230,12 +237,13 @@ function ProductCard({ product }) {
         onClick={() => handleAddToCart(product)}
         disabled={alreadyAdded}
         to=""
-        className={`mt-auto block w-full py-1 text-center text-white ${alreadyAdded?"bg-slate-500 cursor-not-allowed":""} bg-primary border border-primary rounded-b hover:scale-110 transition`}
-        
+        className={`mt-auto block w-full py-1 text-center text-white ${
+          alreadyAdded ? "bg-slate-500 cursor-not-allowed" : ""
+        } bg-primary border border-primary rounded-b hover:scale-110 transition`}
       >
         {alreadyAdded ? "Already Added" : "Add to cart"}
       </button>
-    </div>
+    </motion.div>
   );
 }
 
