@@ -258,7 +258,7 @@ export default function Navbar() {
     <div className=" flex w-full justify-center items-center shadow border-b">
       {/* Fixed navbar */}
       <div
-        className={`flex container py-2 bg-white items-center justify-between gap-1 md:gap-2 fixed top-0 w-full z-50 transition-transform duration-300 ${
+        className={`flex py-2 bg-white items-center justify-between gap-1 md:gap-2 fixed top-0 w-full z-50 transition-transform duration-300 ${
           scrollUp ? "translate-y-0" : "-translate-y-full"
         }`}
       >
