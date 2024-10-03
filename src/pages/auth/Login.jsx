@@ -30,7 +30,8 @@ const Login = () => {
       console.log("login with credential", result);
 
       // Navigate user to the intended route
-      navigate(from, { replace: true });
+      // navigate(from, { replace: true });
+      navigate(-1)
       toast.success("Login Successfully", toastValue);
     } catch (err) {
       setError(err?.message || "An error occurred");

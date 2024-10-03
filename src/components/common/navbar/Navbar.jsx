@@ -255,10 +255,10 @@ export default function Navbar() {
   }
 
   return (
-    <>
+    <div className=" flex w-full justify-center items-center shadow border-b">
       {/* Fixed navbar */}
       <div
-        className={`flex container py-2 bg-white items-center justify-between gap-1 md:gap-2 border-b shadow fixed top-0 w-full z-50 transition-transform duration-300 ${
+        className={`flex container py-2 bg-white items-center justify-between gap-1 md:gap-2 fixed top-0 w-full z-50 transition-transform duration-300 ${
           scrollUp ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -352,7 +352,7 @@ export default function Navbar() {
 
       {/* Add padding to the content below the navbar */}
       <div className="pt-16 mb-4"></div>
-    </>
+    </div>
   );
 }
 
