@@ -10,6 +10,11 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import CartProvider from "./providers/CartProvider.jsx";
+import 'aos/dist/aos.css'; // Import AOS styles
+import AOS from 'aos'; // Import AOS library
+
+AOS.init(); // Initialize AOS
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

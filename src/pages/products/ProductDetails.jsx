@@ -237,16 +237,20 @@ function ProductDetails() {
     <div className="container mx-auto px-4 lg:px-8">
       <section className="py-12 grid lg:grid-cols-2 gap-10">
         {/* Image section */}
-        <div className="slider-box flex flex-col items-center">
+        <div className="slider-box flex flex-col items-center transition-all">
           {/* Main image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.4 }}
             className="w-full max-w-md lg:max-w-lg mb-4"
           >
-            <img
+            <motion.img
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.5 }}
+              transition={{ duration: 0.4 }}
               src={selectedImage}
               alt={selectedProduct.name}
               className="max-lg:mx-auto rounded-2xl w-[25rem] h-[16rem] sm:w-[38rem] sm:h-[25rem] object-cover"
@@ -279,8 +283,8 @@ function ProductDetails() {
 
         {/* Product Details section */}
         <motion.div
-          initial={{ opacity: 0, x:40 }}
-          animate={{ opacity: 1, x:0 }}
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, scale: 1 }}
           transition={{ duration: 0.4 }}
           className="pro-detail flex flex-col gap-y-4"

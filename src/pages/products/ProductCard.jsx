@@ -123,13 +123,18 @@ function ProductCard({ product }) {
   };
   return (
     <motion.div
-      initial={{ opacity: 0, scale:.9 }}
-      animate={{ opacity: 1, scale:1 }}
-      exit={{ opacity: 0, scale:1 }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 1 }}
       transition={{ duration: 0.4 }}
       className="bg-white shadow rounded overflow-hidden group flex flex-col h-full"
     >
-      <div className="relative overflow-hidden">
+      <div
+        className="relative overflow-hidden"
+        data-aos="fade-up" // Specify the animation type
+        data-aos-duration="300" // Animation duration in milliseconds
+        data-aos-easing="ease-in-out"
+      >
         {/* <button>
           <Image
             src={product.image[0]}

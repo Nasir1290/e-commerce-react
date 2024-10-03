@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useCart from "../../hooks/useCart";
+import {motion} from "framer-motion"
 
 const CartDetails = () => {
   const { state, dispatch } = useCart();
@@ -41,7 +42,11 @@ const CartDetails = () => {
           <div>
             <div className="space-y-4">
               {state.map((item) => (
-                <div
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 0.4 }}
                   key={item.id}
                   className="flex flex-col md:flex-row items-center justify-between bg-white p-4 rounded-lg shadow-md"
                 >
@@ -108,7 +113,7 @@ const CartDetails = () => {
                       Remove
                     </button>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
             <hr className="mt-4 border-3 border-purple-400" />

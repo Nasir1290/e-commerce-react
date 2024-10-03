@@ -30,6 +30,10 @@ export default function AllCategories() {
       <div className=" m-6 mt-4 gap-6 grid md:grid-cols-3 sm:grid-cols-2">
         {categories.map((category, index) => (
           <Card
+            data-aos="fade-up" // Specify the animation type
+            data-aos-duration="300" // Animation duration in milliseconds
+            data-aos-easing="ease-all"
+
             shadow="sm"
             onPress={""}
             key={index}
