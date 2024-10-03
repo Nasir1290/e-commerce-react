@@ -26,6 +26,7 @@ const Login = () => {
 
     try {
       // User login
+      console.log(values)
       const result = await signIn(values.email, values.password);
       console.log("login with credential", result);
 
@@ -34,6 +35,7 @@ const Login = () => {
       navigate(-1)
       toast.success("Login Successfully", toastValue);
     } catch (err) {
+      console.log(err)
       setError(err?.message || "An error occurred");
       toast.error(err?.message || "Login failed", toastValue);
     } finally {
@@ -48,7 +50,8 @@ const Login = () => {
       const result = await signInWithGoogle();
 
       // Navigate user to the intended route
-      navigate(from, { replace: true });
+      navigate(-1);
+      // navigate(from, { replace: true });
       toast.success("Login Successfully",toastValue);
     } catch (err) {
       toast.error(err?.message || "Google Sign-in failed", toastValue);
@@ -69,7 +72,7 @@ const Login = () => {
       >
         {/* Username Field */}
         <Form.Item
-          name="username"
+          name="email"
           label={
             <label className=" text-lg font-semibold text-secondary">
               Email

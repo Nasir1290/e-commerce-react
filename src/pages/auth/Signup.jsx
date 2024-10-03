@@ -31,7 +31,7 @@ export default function SignUp() {
       // Create user with email and password
       setIsLoading(true);
       const result = await createUser(values.email, values.newPassword);
-      console.log("sign in", result);
+      // console.log("sign in", result);
       // Update user profile with username and profile image
       await updateUserProfile(
         values.firstName,
@@ -40,7 +40,7 @@ export default function SignUp() {
         values.contact
       );
       setIsLoading(false);
-      navigate("/");
+      navigate(-1);
       toast.success("Sign Up Successfully", toastValue);
     } catch (err) {
       toast.error(err?.message, toastValue);
@@ -54,7 +54,8 @@ export default function SignUp() {
       console.log("Login with Google", result);
 
       // Navigate user to the intended route
-      navigate(from, { replace: true });
+      navigate(-1);
+      // navigate(from, { replace: true });
       toast.success("Login Successfully", toastValue);
     } catch (err) {
       toast.error(err?.message || "Google Sign-in failed", toastValue);
